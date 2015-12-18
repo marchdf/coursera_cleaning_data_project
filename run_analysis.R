@@ -12,12 +12,12 @@ run_analysis <- function(){
     activities <- read.table(paste0(datadir,"activity_labels.txt"),col.names=c("activity_index","activity"))
 
     ## load the data and name the columns as we load them up
-    x_test <- read.table(paste0(datadir,"test/X_test.txt"), nrows = 100)
-    y_test <- read.table(paste0(datadir,"test/y_test.txt"),col.names="activity_index", nrows = 100)
-    subject_test <- read.table(paste0(datadir,"test/subject_test.txt"),col.names="subject", nrows = 100)
-    x_train <- read.table(paste0(datadir,"train/X_train.txt"), nrows = 100)
-    y_train <- read.table(paste0(datadir,"train/y_train.txt"),col.names="activity_index", nrows = 100)
-    subject_train <- read.table(paste0(datadir,"train/subject_train.txt"),col.names="subject", nrows = 100)
+    x_test <- read.table(paste0(datadir,"test/X_test.txt"))
+    y_test <- read.table(paste0(datadir,"test/y_test.txt"),col.names="activity_index")
+    subject_test <- read.table(paste0(datadir,"test/subject_test.txt"),col.names="subject")
+    x_train <- read.table(paste0(datadir,"train/X_train.txt"))
+    y_train <- read.table(paste0(datadir,"train/y_train.txt"),col.names="activity_index")
+    subject_train <- read.table(paste0(datadir,"train/subject_train.txt"),col.names="subject")
     
     ## Before merging the data, let's extract only the measurements on
     ## the mean and std for each measurement (i.e. get only the
@@ -103,8 +103,15 @@ run_analysis <- function(){
         select(-activity_index)
 
     ## rearrange the order of the data frame
-    df <- df[c("subject","activity","domain","acceleration","instrument","jerk","magnitude","variable","axis","value")]
+    df <- df[c("subject","activity","domain","acceleration","instrument","jerk","magnitude","axis","variable","value")]
 
-    ## Write out the solution
+    ## Create a data set with the average of each variable for each
+    ## activity and each subject.
+    tidydf <- df %>%
+        group_by(subject,activity,domain,acceleration,instrument,jerk,magnitude,axis,variable) %>%
+        summarize(mean=mean(value))
 
+    ## Write out the solution to a file
+    ofname="tidy.txt"
+    write.table(tidydf,ofname,row.names=FALSE,quote=FALSE,sep="\t")
 }
