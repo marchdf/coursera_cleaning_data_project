@@ -23,3 +23,15 @@ Project description
 > From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 
 > Good luck!
+
+
+Generating the final result
+-------------------------------
+
+Run the R script `run_analysis.R` in a folder containing the
+UCI_HAR_Dataset folder (which contains the data)
+
+
+Outputs
+----------------
+* Tidy dataset file `SummaryHumanSmartphoneData.txt` (tab-delimited text)
