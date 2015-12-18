@@ -25,3 +25,25 @@ Additional information
 
 * Dataset structure
 
+```{r}
+str(dtTidy)
+```
+
+* List columns in the data table
+
+```{r}
+names(tidydf)
+```
+
+* Show a few rows of the dataset
+
+```{r}
+head(tidydf)
+```
+
+* Summary of variables
+
+```{r}
+summary(tidydf)
+```
+
