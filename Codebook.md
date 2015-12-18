@@ -1,6 +1,6 @@
 Codebook
 ========
-Codebook was generated on 2015-12-18 16:12:37 at the same time as the data set generation.
+Codebook was generated on 2015-12-18 16:13:43 at the same time as the data set generation.
 
 Description of variables
 ------------------------
@@ -27,11 +27,31 @@ Additional information
 
 
 ```r
-str(dtTidy)
+str(tidydf)
 ```
 
 ```
-## Error in str(dtTidy): object 'dtTidy' not found
+## Classes 'grouped_df', 'tbl_df', 'tbl' and 'data.frame':	6120 obs. of  10 variables:
+##  $ subject     : int  1 1 1 1 1 1 1 1 1 1 ...
+##  $ activity    : Factor w/ 6 levels "LAYING","SITTING",..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ domain      : chr  "Frequency" "Frequency" "Frequency" "Frequency" ...
+##  $ acceleration: chr  "Body" "Body" "Body" "Body" ...
+##  $ instrument  : chr  "Accelerometer" "Accelerometer" "Accelerometer" "Accelerometer" ...
+##  $ jerk        : chr  "Jerk" "Jerk" "Jerk" "Jerk" ...
+##  $ magnitude   : chr  "Magnitude" "Magnitude" NA NA ...
+##  $ axis        : logi  NA NA NA NA NA NA ...
+##  $ variable    : chr  "Mean" "Std" "Mean" "Std" ...
+##  $ mean        : num  -0.933 -0.922 -0.943 -0.952 -0.862 ...
+##  - attr(*, "vars")=List of 8
+##   ..$ : symbol subject
+##   ..$ : symbol activity
+##   ..$ : symbol domain
+##   ..$ : symbol acceleration
+##   ..$ : symbol instrument
+##   ..$ : symbol jerk
+##   ..$ : symbol magnitude
+##   ..$ : symbol axis
+##  - attr(*, "drop")= logi TRUE
 ```
 
 * List columns in the data table

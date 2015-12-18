@@ -26,7 +26,7 @@ Additional information
 * Dataset structure
 
 ```{r}
-str(dtTidy)
+str(tidydf)
 ```
 
 * List columns in the data table
