@@ -1,5 +1,6 @@
 Codebook
 ========
+Codebook was generated on 2015-12-18 16:10:36 at the same time as the data set generation.
 
 Description of variables
 ------------------------

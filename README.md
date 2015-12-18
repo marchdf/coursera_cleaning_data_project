@@ -171,3 +171,8 @@ Code description
     ofname="SummaryHumanSmartphoneData.txt"
     write.table(tidydf,ofname,row.names=FALSE,quote=FALSE,sep="\t")
 ```
+
+13) Make the codebook using knitr
+```r
+    knit("make_codebook.rmd", output="Codebook.md", encoding="ISO8859-1", quiet=TRUE)
+```
