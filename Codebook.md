@@ -4,8 +4,6 @@ Codebook
 Description of variables
 ------------------------
 
-
-
 Variable name    | Description
 -----------------|------------
 subject          | ID the subject who performed the activity for each window sample (1 to 30)
@@ -18,3 +16,10 @@ jerk         	 | Feature: jerk signal (Jerk or NA)
 magnitude    	 | Feature: magnitude of the signals calculated using the Euclidean norm (Magnitude or NA)
 axis         	 | Feature: 3-axial signals in the X, Y and Z directions (X, Y, Z, or NA)
 mean        	 | Average of each variable for each activity and each subject
+
+
+
+Additional information
+----------------------
+
+# Dataset structure
