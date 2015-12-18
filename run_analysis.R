@@ -112,6 +112,6 @@ run_analysis <- function(){
         summarize(mean=mean(value))
 
     ## Write out the solution to a file
-    ofname="tidy.txt"
+    ofname="SummaryHumanSmartphoneData.txt"
     write.table(tidydf,ofname,row.names=FALSE,quote=FALSE,sep="\t")
 }
