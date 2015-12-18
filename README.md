@@ -41,51 +41,51 @@ Code description
 1) Load the required libraries `tidyr` and `dplyr`
 
     library(dplyr)
-        library(tidyr)
+    library(tidyr)
 
 2) Set data directory and load the files
 
     ## Setup variables
-        datadir <- "UCI_HAR_Dataset/"
+    datadir <- "UCI_HAR_Dataset/"
 
     ## load the feature and activity names
-        features <- read.table(paste0(datadir,"features.txt"),col.names=c("index","name"))
-	    activities <- read.table(paste0(datadir,"activity_labels.txt"),col.names=c("activity_index","activity"))
+    features <- read.table(paste0(datadir,"features.txt"),col.names=c("index","name"))
+    activities <- read.table(paste0(datadir,"activity_labels.txt"),col.names=c("activity_index","activity"))
 
     ## load the data and name the columns as we load them up
-        x_test <- read.table(paste0(datadir,"test/X_test.txt"))
-	    y_test <- read.table(paste0(datadir,"test/y_test.txt"),col.names="activity_index")
-	        subject_test <- read.table(paste0(datadir,"test/subject_test.txt"),col.names="subject")
-		    x_train <- read.table(paste0(datadir,"train/X_train.txt"))
-		        y_train <- read.table(paste0(datadir,"train/y_train.txt"),col.names="activity_index")
-			    subject_train <- read.table(paste0(datadir,"train/subject_train.txt"),col.names="subject")
+    x_test <- read.table(paste0(datadir,"test/X_test.txt"))
+    y_test <- read.table(paste0(datadir,"test/y_test.txt"),col.names="activity_index")
+    subject_test <- read.table(paste0(datadir,"test/subject_test.txt"),col.names="subject")
+    x_train <- read.table(paste0(datadir,"train/X_train.txt"))
+    y_train <- read.table(paste0(datadir,"train/y_train.txt"),col.names="activity_index")
+    subject_train <- read.table(paste0(datadir,"train/subject_train.txt"),col.names="subject")
 
 3) Extract the mean and std for each measurement
 
     idx <- grepl("mean\\(\\)|std\\(\\)",features$name)
-        x_test <- x_test[,idx]
-	    x_train <- x_train[,idx]
-	        features <- features[idx,]
+    x_test <- x_test[,idx]
+    x_train <- x_train[,idx]
+    features <- features[idx,]
 
 4) Format the features data table for easier manipulation later
 
     fnames <- as.character(features$name)
-        fnames <- sub("^t","Time",fnames)
-	    fnames <- sub("^f","Frequency",fnames)
-	        fnames <- sub("Acc","Accelerometer",fnames)
-		    fnames <- sub("Gyro","Gyroscope",fnames)
-		        fnames <- sub("Mag","Magnitude",fnames)
-			    fnames <- sub("-mean\\(\\)","Mean",fnames)
-			        fnames <- sub("-std\\(\\)","Std",fnames)
-				    fnames <- sub("-","",fnames)
+    fnames <- sub("^t","Time",fnames)
+    fnames <- sub("^f","Frequency",fnames)
+    fnames <- sub("Acc","Accelerometer",fnames)
+    fnames <- sub("Gyro","Gyroscope",fnames)
+    fnames <- sub("Mag","Magnitude",fnames)
+    fnames <- sub("-mean\\(\\)","Mean",fnames)
+    fnames <- sub("-std\\(\\)","Std",fnames)
+    fnames <- sub("-","",fnames)
 
     ## store the formatted names back to features
-        features$name <- fnames
+    features$name <- fnames
 
     ## Using these names, make new columns based on the different
-        ## features of the test
-	    features <- features %>%
-	            ## Get the domain (Time or Frequency)
+    ## features of the test
+    features <- features %>%
+    ## Get the domain (Time or Frequency)
 		            mutate(domain=ifelse(grepl("Time",name),yes="Time",no="Frequency")) %>%
 			            ## Get the acceleration type (Body, Gravity, or NA)
 				            mutate(acceleration=ifelse(grepl("Body",name),yes="Body",no=ifelse(grepl("Gravity",name),yes="Gravity",no=NA))) %>%
