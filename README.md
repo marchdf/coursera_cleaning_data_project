@@ -28,10 +28,9 @@ Project description
 Generating the final result
 -------------------------------
 
-Run the R script `run_analysis.R` in a folder containing the
-UCI_HAR_Dataset folder (which contains the data)
+* Run the R script `run_analysis.R` in a folder containing the UCI_HAR_Dataset folder (which contains the data)
 
 
-Outputs
+Output
 ----------------
 * Tidy dataset file `SummaryHumanSmartphoneData.txt` (tab-delimited text)
