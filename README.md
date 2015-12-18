@@ -39,9 +39,10 @@ Code description
 ----------------
 
 1) Load the required libraries `tidyr` and `dplyr`
-
+```r
     library(dplyr)
     library(tidyr)
+```
 
 2) Set data directory and load the files
 
