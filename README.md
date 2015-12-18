@@ -42,6 +42,7 @@ Code description
 ```r
     library(dplyr)
     library(tidyr)
+    library(knitr)
 ```
 
 2) Set data directory and load the files

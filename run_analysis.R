@@ -3,6 +3,7 @@ run_analysis <- function(){
     ## Load libraries
     library(dplyr)
     library(tidyr)
+    library(knitr)
     
     ## Setup variables
     datadir <- "UCI_HAR_Dataset/"
@@ -114,4 +115,7 @@ run_analysis <- function(){
     ## Write out the solution to a file
     ofname="SummaryHumanSmartphoneData.txt"
     write.table(tidydf,ofname,row.names=FALSE,quote=FALSE,sep="\t")
+
+    ## Make the codebook using knitr
+    knit("make_codebook.rmd", output="Codebook.md", encoding="ISO8859-1", quiet=TRUE)
 }

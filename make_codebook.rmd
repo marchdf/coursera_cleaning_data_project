@@ -1,5 +1,6 @@
 Codebook
 ========
+Codebook was generated on r as.character(Sys.time()) at the same time as the data set generation.
 
 Description of variables
 ------------------------
@@ -23,3 +24,4 @@ Additional information
 ----------------------
 
 * Dataset structure
+
