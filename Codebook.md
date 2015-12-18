@@ -22,4 +22,4 @@ mean        	 | Average of each variable for each activity and each subject
 Additional information
 ----------------------
 
-# Dataset structure
+* Dataset structure
