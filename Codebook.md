@@ -1,2 +1,5 @@
 Codebook
 ========
+
+Description of variables
+------------------------
