@@ -45,7 +45,7 @@ Code description
 ```
 
 2) Set data directory and load the files
-
+```r
     ## Setup variables
     datadir <- "UCI_HAR_Dataset/"
 
@@ -60,16 +60,18 @@ Code description
     x_train <- read.table(paste0(datadir,"train/X_train.txt"))
     y_train <- read.table(paste0(datadir,"train/y_train.txt"),col.names="activity_index")
     subject_train <- read.table(paste0(datadir,"train/subject_train.txt"),col.names="subject")
+```
 
 3) Extract the mean and std for each measurement
-
+```r
     idx <- grepl("mean\\(\\)|std\\(\\)",features$name)
     x_test <- x_test[,idx]
     x_train <- x_train[,idx]
     features <- features[idx,]
+```
 
 4) Format the features data table for easier manipulation later
-
+```r
     fnames <- as.character(features$name)
     fnames <- sub("^t","Time",fnames)
     fnames <- sub("^f","Frequency",fnames)
@@ -102,11 +104,10 @@ Code description
 		mutate(axis=ifelse(grepl("-X",name),yes="X",no=ifelse(grepl("-Y",name),yes="Y",no=ifelse(grepl("-Z",name),yes="Z",no=NA)))) %>%
 		## Remove the formatted names
 		select(-name)
-
-
+```
 
 5) Merge the data so that it now looks like:
-
+```r
     ## s | y |
     ## t | t |
     ## e | e | xtest
@@ -120,13 +121,15 @@ Code description
     ## i | i |
     ## n | n |
     df <- rbind(cbind(subject_test,y_test,x_test),cbind(subject_train,y_train,x_train))
+```
 
 6) Next we gather the measurements columns (exclude subject and activity)
-
+```r
     df <- df %>% gather(index,value,-subject,-activity_index)
+```
 
 7) Next we rename the measurements to something more meaningful based on the features files which matches indices with the feature names
-
+```r
     df <- df %>%
             mutate(index = extract_numeric(index)) %>%
             ## match measurement indices with names
@@ -134,30 +137,36 @@ Code description
             ## remove the index column
             select(-index)
     df <- droplevels(df) ## remove unused levels (to clean a bit)
+```
 
 8) Order by increasing subject id
-
+```r
     df <- df %>%
           arrange(subject,activity_index)
+```
 
 9) Rename the activities indices to their full name
-
+```r
     df <- df %>%
             left_join(activities) %>%
             ## remove the index column
             select(-activity_index)
+```
 
 10) Rearrange the order of the data frame
-
+```r
     df <- df[c("subject","activity","domain","acceleration","instrument","jerk","magnitude","axis","variable","value")]
+```
 
 11) Create a data set with the average of each variable for each activity and each subject.
-
+```r
     tidydf <- df %>%
             group_by(subject,activity,domain,acceleration,instrument,jerk,magnitude,axis,variable) %>%
             summarize(mean=mean(value))
+```
 
 12) Write out the solution to a file
-
+```r
     ofname="SummaryHumanSmartphoneData.txt"
     write.table(tidydf,ofname,row.names=FALSE,quote=FALSE,sep="\t")
+```
